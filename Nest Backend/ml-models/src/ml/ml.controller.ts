@@ -37,11 +37,68 @@ export class MlController {
     return 'Hello from ML Controller!';
   }
 
+  bitcoindata = {
+    "date": "2025-09-23"
+  }
   @Get('bank-model')
-  async predict() {
+  async predictBankLeave() {
     try {
-      console.log("aaa")
-      const prediction = await this.mlService.predict(this.inputDataDemo);
+      const prediction = await this.mlService.predictBankLeave(this.bitcoindata);
+      
+      return {
+        success: true,
+        prediction: prediction,
+        timestamp: new Date().toISOString()
+
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        timestamp: new Date().toISOString()
+
+      };
+    }
+
+  }
+
+
+  @Get('bitcoin-model')
+  async predictBitcoinPrice() {
+    try {
+
+      const prediction = await this.mlService.predictBitcoinPrice({"date": "2025-09-23"});
+      
+      return {
+        success: true,
+        prediction: prediction,
+        timestamp: new Date().toISOString()
+
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        timestamp: new Date().toISOString()
+
+      };
+    }
+
+  }
+  
+  
+  @Get('insurance-model')
+  async insuranceChargesPrediction() {
+    try {
+
+      const prediction = await this.mlService.insuranceChargesPrediction({
+            'age': 23,
+            'sex': 'male',
+            'bmi': 35.9,
+            'children': 2,
+            'smoker': 'no',
+            'region': 'southwest'
+        });
       
       return {
         success: true,

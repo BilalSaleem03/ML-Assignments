@@ -25,14 +25,13 @@ import joblib  # For loading .pkl files
 import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-trained_model_dir = os.path.join(script_dir, 'trained-model')
-# trained_model_dir = os.path.join(script_dir, '..', 'trained-model')
+bank_leaving_dir = os.path.join(script_dir, '..', '..', 'trained-model', 'bank-leaving-prediction')
 
 def load_preprocessing_objects():
-    """Load all preprocessing objects from the trained-model folder"""
+    """Load all preprocessing objects from the bank-leaving-prediction folder"""
     try:
         # Load the scaler
-        scaler = joblib.load(os.path.join(trained_model_dir, 'scaler.pkl'))
+        scaler = joblib.load(os.path.join(bank_leaving_dir, 'scaler.pkl'))
         print("Scaler loaded successfully")
     except FileNotFoundError:
         print("Warning: Scaler file not found")
@@ -40,7 +39,7 @@ def load_preprocessing_objects():
     
     try:
         # Load the label encoder
-        le = joblib.load(os.path.join(trained_model_dir, 'label_encoder.pkl'))
+        le = joblib.load(os.path.join(bank_leaving_dir, 'label_encoder.pkl'))
         print("Label encoder loaded successfully")
     except FileNotFoundError:
         print("Warning: Label encoder file not found")
@@ -48,7 +47,7 @@ def load_preprocessing_objects():
     
     try:
         # Load column order
-        column_order = joblib.load(os.path.join(trained_model_dir, 'column_order.pkl'))
+        column_order = joblib.load(os.path.join(bank_leaving_dir, 'column_order.pkl'))
         print("Column order loaded successfully")
     except FileNotFoundError:
         print("Warning: Column order file not found")
@@ -57,7 +56,7 @@ def load_preprocessing_objects():
     return scaler, le, column_order
 
 # Load model and preprocessing objects
-model = load_model(os.path.join(trained_model_dir, 'ANN_model_for_Bank_leaving_prediction.h5'))
+model = load_model(os.path.join(bank_leaving_dir, 'ANN_model_for_Bank_leaving_prediction.h5'))
 scaler, le, column_order = load_preprocessing_objects()
 
 def preprocess_input(input_dict, scaler, le, column_order):
