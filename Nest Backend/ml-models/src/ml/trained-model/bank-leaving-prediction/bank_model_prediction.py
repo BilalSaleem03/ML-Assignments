@@ -1,19 +1,3 @@
-# If you see "No module named 'sklearn'", install scikit-learn:
-# pip install scikit-learn
-
-try:
-    import sklearn
-except ImportError:
-    print("ERROR: scikit-learn is not installed. Please run 'pip install scikit-learn' in your Python environment.")
-    sys.exit(1)
-
-# import sys
-# import json
-# import numpy as np
-# from tensorflow.keras.models import load_model
-
-# # Load model
-# model = load_model('./trained-model/ANN_model_for_bank_leaving_prediction.h5')
 
 
 import sys
